@@ -5,6 +5,7 @@ main: ${mainClass}
 version: ${version}
 url: ${url}
 commands:
-  example:
-    aliases: ["ex"]
-    description: "This is an example plugin."
+  nick:
+    description: "Change your nickname with this command."
+  nicknames:
+    description: "Base command of the Nicknames plugin"
