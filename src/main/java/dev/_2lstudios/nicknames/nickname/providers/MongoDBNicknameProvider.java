@@ -8,14 +8,33 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 
 import org.bson.Document;
+import org.bukkit.configuration.Configuration;
 
 public class MongoDBNicknameProvider implements NicknameProvider {
     private final MongoClient client;
     private final MongoCollection<Document> collection;
 
-    public MongoDBNicknameProvider() {
-        this.client = MongoClients.create(new ConnectionString("mongodb://localhost/nicknames"));
-        this.collection = this.client.getDatabase("nicknames").getCollection("Users");
+    public String getCredentials(final String user, final String pass) {
+        if (user != null && !user.isEmpty() && pass != null && !pass.isEmpty()) {
+            return user + ":" + pass + "@";
+        }
+
+        return "";
+    }
+
+    public MongoDBNicknameProvider(final String host, final int port, final String database, final String user,
+            final String pass, final String collection) {
+        final ConnectionString connectionString = new ConnectionString(
+                "mongodb://" + getCredentials(user, pass) + host + ":" + port + "/" + database);
+
+        this.client = MongoClients.create(connectionString);
+        this.collection = this.client.getDatabase(database).getCollection(collection);
+    }
+
+    public MongoDBNicknameProvider(final Configuration config) {
+        this(config.getString("provider.host"), config.getInt("provider.port"), config.getString("provider.database"),
+                config.getString("provider.user"), config.getString("provider.pass"),
+                config.getString("provider.collection"));
     }
 
     @Override
