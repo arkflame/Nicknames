@@ -2,6 +2,8 @@ package dev._2lstudios.nicknames.nickname;
 
 import java.util.UUID;
 
+import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
+
 public class NicknamePlayer {
     private final NicknameProvider nicknameProvider;
     private final UUID uuid;
