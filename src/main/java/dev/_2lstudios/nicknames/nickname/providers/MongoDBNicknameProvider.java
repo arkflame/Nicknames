@@ -37,22 +37,27 @@ public class MongoDBNicknameProvider implements NicknameProvider {
                 config.getString("provider.collection"));
     }
 
+    private Document toMongoDocument(final UUID uuid, final String nickname) {
+        return new Document().append("uuid", uuid.toString()).append("nickname", nickname);
+    }
+
     @Override
-    public String getNickname(UUID uuid) {
+    public String getNickname(final UUID uuid) {
         final Document filter = new Document("uuid", uuid.toString());
         final Document result = this.collection.find(filter).first();
+
         return result != null ? result.getString("nickname") : null;
     }
 
     @Override
-    public String setNickname(UUID uuid, String nickname) {
-        final Document document = new Document("uuid", uuid.toString());
+    public String setNickname(final UUID uuid, final String nickname) {
+        final Document document = toMongoDocument(uuid, nickname);
+        final Document result = this.collection.find(new Document("uuid", uuid)).first();
 
-        if (this.getNickname(uuid) == null) {
-            document.append("nickname", nickname);
+        if (result == null) {
             this.collection.insertOne(document);
         } else {
-            this.collection.findOneAndUpdate(document, new Document("nickname", nickname));
+            this.collection.updateOne(result, document);
         }
 
         return nickname;
