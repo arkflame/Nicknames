@@ -67,6 +67,8 @@ public class LangManager {
             final String message = lang.getMessage(key, placeholders);
 
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+        } else {
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNo lang files had been found!"));
         }
     }
 }
