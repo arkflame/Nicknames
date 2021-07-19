@@ -98,4 +98,8 @@ public class ConfigUtil {
 			}
 		});
 	}
+
+    public String getDataFolder() {
+		return dataFolderPath;
+    }
 }
