@@ -1,4 +1,4 @@
-package dev._2lstudios.nicknames.nickname;
+package dev._2lstudios.nicknames.nickname.providers;
 
 import java.util.UUID;
 
