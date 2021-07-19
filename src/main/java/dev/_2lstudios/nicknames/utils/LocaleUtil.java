@@ -19,9 +19,7 @@ public class LocaleUtil {
 			}
 		}
 
-		if (locale != null && locale.length() > 1) {
-			locale = locale.substring(0, 2);
-		} else {
+		if (locale == null) {
 			locale = "en_US";
 		}
 
