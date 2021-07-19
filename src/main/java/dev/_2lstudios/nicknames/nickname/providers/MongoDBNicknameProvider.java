@@ -52,7 +52,7 @@ public class MongoDBNicknameProvider implements NicknameProvider {
     @Override
     public String setNickname(final UUID uuid, final String nickname) {
         final Document document = toMongoDocument(uuid, nickname);
-        final Document result = this.collection.find(new Document("uuid", uuid)).first();
+        final Document result = this.collection.find(new Document("uuid", uuid.toString())).first();
 
         if (result == null) {
             this.collection.insertOne(document);
