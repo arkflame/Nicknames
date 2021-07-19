@@ -31,19 +31,25 @@ public class LangManager {
     }
 
     public void sendMessage(Player player, String key, final Placeholder... placeholders) {
-        final String[] locale = LocaleUtil.getLocale(player).toLowerCase().split("_");
-        final String langCode = locale[0];
-        final String region = locale[1];
-        final Lang lang;
+        final String rawLocale = LocaleUtil.getLocale(player).toLowerCase();
 
-        if (languages.containsKey(langCode + "_" + region)) {
-            lang = languages.get(langCode + "_" + region);
-        } else if (languages.containsKey(langCode)) {
-            lang = languages.get(langCode);
+        if (rawLocale.contains("_")) {
+            final String[] locale = rawLocale.split("_");
+            final String langCode = locale[0];
+            final String region = locale[1];
+            final Lang lang;
+
+            if (languages.containsKey(langCode + "_" + region)) {
+                lang = languages.get(langCode + "_" + region);
+            } else if (languages.containsKey(langCode)) {
+                lang = languages.get(langCode);
+            } else if (languages.containsKey(defaultLocale)) {
+                lang = languages.get(defaultLocale);
+            } else {
+                lang = null;
+            }
         } else if (languages.containsKey(defaultLocale)) {
             lang = languages.get(defaultLocale);
-        } else {
-            lang = null;
         }
 
         if (lang != null) {
