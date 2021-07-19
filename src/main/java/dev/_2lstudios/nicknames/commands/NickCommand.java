@@ -10,6 +10,7 @@ import org.bukkit.plugin.Plugin;
 import dev._2lstudios.nicknames.lang.LangManager;
 import dev._2lstudios.nicknames.nickname.NicknamePlayer;
 import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
+import dev._2lstudios.nicknames.placeholders.Placeholder;
 import dev._2lstudios.nicknames.validators.NicknameValidator;
 
 public class NickCommand implements CommandExecutor {
@@ -41,11 +42,13 @@ public class NickCommand implements CommandExecutor {
                     langManager.sendMessage(player, "error.invalid_nickname");
                 } else {
                     this.plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+                        final String oldName = player.getDisplayName();
                         final NicknamePlayer nicknamePlayer = new NicknamePlayer(nicknameProvider,
                                 player.getUniqueId());
 
                         nicknamePlayer.setNickname(nickname);
-                        langManager.sendMessage(player, "nickname.changed");
+                        player.setDisplayName(nickname);
+                        langManager.sendMessage(player, "nickname.changed", new Placeholder("%old_nickname%", oldName), new Placeholder("%new_nickname%", nickname));
                     });
                 }
             }
