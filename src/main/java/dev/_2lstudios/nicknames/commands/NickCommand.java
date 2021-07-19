@@ -7,17 +7,20 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
+import dev._2lstudios.nicknames.lang.LangManager;
 import dev._2lstudios.nicknames.nickname.NicknamePlayer;
-import dev._2lstudios.nicknames.nickname.NicknameProvider;
+import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
 import dev._2lstudios.nicknames.validators.NicknameValidator;
 
 public class NickCommand implements CommandExecutor {
     private final Plugin plugin;
     private final NicknameProvider nicknameProvider;
+    private final LangManager langManager;
 
-    public NickCommand(final Plugin plugin, final NicknameProvider nicknameProvider) {
+    public NickCommand(final Plugin plugin, final NicknameProvider nicknameProvider, final LangManager langManager) {
         this.plugin = plugin;
         this.nicknameProvider = nicknameProvider;
+        this.langManager = langManager;
     }
 
     @Override
@@ -28,21 +31,21 @@ public class NickCommand implements CommandExecutor {
             final Player player = (Player) sender;
 
             if (player.hasPermission("nicknames.usage")) {
-                player.sendMessage("no permission bruh");
+                langManager.sendMessage(player, "error.permission");
             } else if (args.length < 1) {
-                player.sendMessage("/nick <displayname>");
+                langManager.sendMessage(player, "error.usage");
             } else {
                 final String nickname = ChatColor.translateAlternateColorCodes('&', args[0]);
 
                 if (!NicknameValidator.isValid(nickname)) {
-                    player.sendMessage("invalid nickname: " + nickname);
+                    langManager.sendMessage(player, "error.invalid_nickname");
                 } else {
                     this.plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
                         final NicknamePlayer nicknamePlayer = new NicknamePlayer(nicknameProvider,
                                 player.getUniqueId());
 
                         nicknamePlayer.setNickname(nickname);
-                        player.sendMessage("nickname cambiado a " + nickname);
+                        langManager.sendMessage(player, "nickname.changed");
                     });
                 }
             }
