@@ -7,7 +7,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 
 import dev._2lstudios.nicknames.nickname.NicknamePlayer;
-import dev._2lstudios.nicknames.nickname.NicknameProvider;
+import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
 
 public class PlayerJoinListener implements Listener {
     private final Plugin plugin;
