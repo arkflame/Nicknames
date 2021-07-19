@@ -1,0 +1,13 @@
+error:
+  console: "&cThis command can't be used from the console!"
+  permission: "&cInsufficent permissions!"
+  invalid_nickname: "&c%nickname% is an invalid nickname!"
+
+nickname:
+  changed: "&aChanged nickname from &b%old_nickname%&a to &b%new_nickname%&a!"
+  changed_other: "&aChanged &b%player%&a nickname to &b%new_nickname%&a!"
+  usage: "&c/nick <nick>"
+
+help: |-
+  &aNicknames &b%version%&a by &bLinsaFTW
+  &e /nick <nick>&7 - &bChange your Nickname!
