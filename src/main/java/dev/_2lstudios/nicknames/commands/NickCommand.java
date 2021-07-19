@@ -30,7 +30,7 @@ public class NickCommand implements CommandExecutor {
         } else {
             final Player player = (Player) sender;
 
-            if (player.hasPermission("nicknames.usage")) {
+            if (!player.hasPermission("nicknames.usage")) {
                 langManager.sendMessage(player, "error.permission");
             } else if (args.length < 1) {
                 langManager.sendMessage(player, "error.usage");
