@@ -1,6 +1,5 @@
 package dev._2lstudios.nicknames.lang;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,9 +14,7 @@ public class Lang {
     private final String notFoundMessage = "&c&lERROR: &cKey %key% doesn't exist in the locale config file!";
 
     private void getMessages(final ConfigurationSection section) {
-        final Collection<String> keys = section.getKeys(false);
-
-        for (final String key : keys) {
+        for (final String key : section.getKeys(false)) {
             final Object object = section.get(key);
 
             if (object instanceof ConfigurationSection) {
