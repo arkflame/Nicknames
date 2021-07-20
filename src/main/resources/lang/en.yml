@@ -8,6 +8,10 @@ nickname:
   changed_other: "&aChanged &b%player%&a nickname to &b%new_nickname%&a!"
   usage: "&c/nick <nick>"
 
+clearnick:
+  cleared: "&aSuccesfully removed your nickname &b%nickname%&a!"
+
 help: |-
   &aNicknames &b%version%&a by &bLinsaFTW
-  &e /nick <nick>&7 - &bChange your Nickname!
+  &e /nick <nick>&7 - &bChange your nickname!
+  &e /clearnick&7 - &bClear your nickname!
