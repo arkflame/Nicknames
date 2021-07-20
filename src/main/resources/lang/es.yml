@@ -12,6 +12,7 @@ nickname:
 
 clearnick:
   cleared: "&aEliminaste tu nickname &b%nickname%&a!"
+  no_nickname: "&cNo tienes ningun nickname!"
 
 help: |-
   &aNicknames &b%version%&a por &bLinsaFTW

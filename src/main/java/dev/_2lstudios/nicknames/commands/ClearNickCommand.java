@@ -18,7 +18,8 @@ public class ClearNickCommand implements CommandExecutor {
     private final NicknameProvider nicknameProvider;
     private final LangManager langManager;
 
-    public ClearNickCommand(final Plugin plugin, final NicknameProvider nicknameProvider, final LangManager langManager) {
+    public ClearNickCommand(final Plugin plugin, final NicknameProvider nicknameProvider,
+            final LangManager langManager) {
         this.plugin = plugin;
         this.nicknameProvider = nicknameProvider;
         this.langManager = langManager;
@@ -34,14 +35,21 @@ public class ClearNickCommand implements CommandExecutor {
             if (!player.hasPermission("nicknames.usage")) {
                 langManager.sendMessage(player, "error.permission");
             } else {
-                this.plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-                    final NicknamePlayer nicknamePlayer = new NicknamePlayer(nicknameProvider, player.getUniqueId());
-                    final String nickname = player.getDisplayName();
+                final String displayName = player.getDisplayName();
+                
+                if (displayName == null || displayName.equals(player.getName())) {
+                    langManager.sendMessage(player, "clearnick.no_nickname");
+                } else {
+                    this.plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+                        final NicknamePlayer nicknamePlayer = new NicknamePlayer(nicknameProvider,
+                                player.getUniqueId());
+                        final String nickname = player.getDisplayName();
 
-                    nicknamePlayer.setNickname(null);
-                    player.setDisplayName(null);
-                    langManager.sendMessage(player, "clearnick.cleared", new Placeholder("%nickname%", nickname));
-                });
+                        nicknamePlayer.setNickname(null);
+                        player.setDisplayName(null);
+                        langManager.sendMessage(player, "clearnick.cleared", new Placeholder("%nickname%", nickname));
+                    });
+                }
             }
         }
 
