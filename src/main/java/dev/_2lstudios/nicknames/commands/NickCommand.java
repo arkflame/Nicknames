@@ -34,7 +34,7 @@ public class NickCommand implements CommandExecutor {
             if (!player.hasPermission("nicknames.usage")) {
                 langManager.sendMessage(player, "error.permission");
             } else if (args.length < 1) {
-                langManager.sendMessage(player, "nickname.usage");
+                langManager.sendMessage(player, "nickname.error.usage");
             } else {
                 final String nickname = ChatColor.translateAlternateColorCodes('&', args[0]);
 
