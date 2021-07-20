@@ -32,9 +32,6 @@ public class PlayerJoinListener implements Listener {
 
             if (nickname != null) {
                 player.setDisplayName(nickname);
-                player.sendMessage("estas usando el nickname '" + nickname + "'!");
-            } else {
-                player.sendMessage("no tienes un nickname establecido!");
             }
         });
     }
