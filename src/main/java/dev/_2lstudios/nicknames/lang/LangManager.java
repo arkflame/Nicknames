@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.ChatColor;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
 
@@ -30,11 +31,18 @@ public class LangManager {
         this.defaultLocale = defaultLocale;
     }
 
-    public void sendMessage(Player player, String key, final Placeholder... placeholders) {
-        final String rawLocale = LocaleUtil.getLocale(player).toLowerCase();
+    public void sendMessage(CommandSender sender, String key, final Placeholder... placeholders) {
+        final String rawLocale;
+
+        if (sender instanceof Player) {
+            rawLocale = LocaleUtil.getLocale((Player) sender).toLowerCase();
+        } else {
+            rawLocale = null;
+        }
+
         Lang lang = null;
 
-        if (rawLocale.contains("_")) {
+        if (rawLocale != null && rawLocale.contains("_")) {
             final String[] locale = rawLocale.split("_");
             final String langCode = locale[0];
             final String region = locale[1];
@@ -53,9 +61,9 @@ public class LangManager {
         if (lang != null) {
             final String message = lang.getMessage(key, placeholders);
 
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
         } else {
-            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNo lang files had been found!"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNo lang files had been found!"));
         }
     }
 }
