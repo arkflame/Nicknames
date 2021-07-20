@@ -39,11 +39,11 @@ public class NickCommand implements CommandExecutor {
                 final String nickname = ChatColor.translateAlternateColorCodes('&', args[0]);
 
                 if (!NicknameValidator.isValidLength(nickname)) {
-                    langManager.sendMessage(player, "error.invalid_nickname");
+                    langManager.sendMessage(player, "nickname.error.length", new Placeholder("%nickname%", nickname));
                 } else if (!NicknameValidator.isValidChars(nickname)) {
-                    langManager.sendMessage(player, "error.invalid_nickname");
-                } else if (!NicknameValidator.isNotUsed(nickname)) {
-                    langManager.sendMessage(player, "error.invalid_nickname");
+                    langManager.sendMessage(player, "nickname.error.characters", new Placeholder("%nickname%", nickname));
+                } else if (!NicknameValidator.isNotUsed(nickname, player.getName())) {
+                    langManager.sendMessage(player, "nickname.error.already_used", new Placeholder("%nickname%", nickname));
                 } else {
                     this.plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
                         final String oldName = player.getDisplayName();
