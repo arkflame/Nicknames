@@ -11,6 +11,7 @@ import java.util.jar.JarFile;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import dev._2lstudios.nicknames.commands.ClearNickCommand;
 import dev._2lstudios.nicknames.commands.NickCommand;
 import dev._2lstudios.nicknames.lang.LangManager;
 import dev._2lstudios.nicknames.listeners.PlayerJoinListener;
@@ -63,5 +64,6 @@ public class Nicknames extends JavaPlugin {
         this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, nicknameProvider), this);
 
         this.getCommand("nick").setExecutor(new NickCommand(this, nicknameProvider, langManager));
+        this.getCommand("clearnick").setExecutor(new ClearNickCommand(this, nicknameProvider, langManager));
     }
 }

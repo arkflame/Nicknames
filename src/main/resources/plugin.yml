@@ -9,3 +9,5 @@ commands:
     description: "Change your nickname with this command."
   nicknames:
     description: "Base command of the Nicknames plugin"
+  clearnick:
+    description: "Clears your current nickname"
