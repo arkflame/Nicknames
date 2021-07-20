@@ -1,0 +1,19 @@
+error:
+  console: "&cEste comando no puede ser usado desde la consola!"
+  permission: "&cPermisos insuficientes!"
+
+nickname:
+  changed: "&aCambiaste tu nickname de &b%old_nickname%&a a &b%new_nickname%&a!"
+  error:
+    usage: "&c/nick <nick>"
+    characters: "&b%nickname%&c contiene caracteres invalidos!"
+    already_used: "&b%nickname%&c ya esta en uso!"
+    length: "&b%nickname%&c tiene que medir entre 3 y 16 letras!"
+
+clearnick:
+  cleared: "&aEliminaste tu nickname &b%nickname%&a!"
+
+help: |-
+  &aNicknames &b%version%&a por &bLinsaFTW
+  &e /nick <nick>&7 - &bCambia tu nickname!
+  &e /clearnick&7 - &bLimpia tu nickname!
