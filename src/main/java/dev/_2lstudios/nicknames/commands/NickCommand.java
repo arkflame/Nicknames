@@ -38,23 +38,27 @@ public class NickCommand implements CommandExecutor {
             } else {
                 final String nickname = ChatColor.translateAlternateColorCodes('&', args[0]);
 
-                if (!NicknameValidator.isValidLength(nickname)) {
-                    langManager.sendMessage(player, "nickname.error.length", new Placeholder("%nickname%", nickname));
-                } else if (!NicknameValidator.isValidChars(nickname)) {
-                    langManager.sendMessage(player, "nickname.error.characters", new Placeholder("%nickname%", nickname));
-                } else if (!NicknameValidator.isNotUsed(nickname, player.getName())) {
-                    langManager.sendMessage(player, "nickname.error.already_used", new Placeholder("%nickname%", nickname));
-                } else {
-                    this.plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+                this.plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+                    if (!NicknameValidator.isValidLength(nickname)) {
+                        langManager.sendMessage(player, "nickname.error.length",
+                                new Placeholder("%nickname%", nickname));
+                    } else if (!NicknameValidator.isValidChars(nickname)) {
+                        langManager.sendMessage(player, "nickname.error.characters",
+                                new Placeholder("%nickname%", nickname));
+                    } else if (!NicknameValidator.isNotUsed(nickname, player.getName())) {
+                        langManager.sendMessage(player, "nickname.error.already_used",
+                                new Placeholder("%nickname%", nickname));
+                    } else {
                         final String oldName = player.getDisplayName();
                         final NicknamePlayer nicknamePlayer = new NicknamePlayer(nicknameProvider,
                                 player.getUniqueId());
 
                         nicknamePlayer.setNickname(nickname);
                         player.setDisplayName(nickname);
-                        langManager.sendMessage(player, "nickname.changed", new Placeholder("%old_nickname%", oldName), new Placeholder("%new_nickname%", nickname));
-                    });
-                }
+                        langManager.sendMessage(player, "nickname.changed", new Placeholder("%old_nickname%", oldName),
+                                new Placeholder("%new_nickname%", nickname));
+                    }
+                });
             }
         }
 
