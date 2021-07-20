@@ -27,7 +27,7 @@ public class NickCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("cant be used from the console");
+            langManager.sendMessage(sender, "error.console");
         } else {
             final Player player = (Player) sender;
 
@@ -38,7 +38,11 @@ public class NickCommand implements CommandExecutor {
             } else {
                 final String nickname = ChatColor.translateAlternateColorCodes('&', args[0]);
 
-                if (!NicknameValidator.isValid(nickname)) {
+                if (!NicknameValidator.isValidLength(nickname)) {
+                    langManager.sendMessage(player, "error.invalid_nickname");
+                } else if (!NicknameValidator.isValidChars(nickname)) {
+                    langManager.sendMessage(player, "error.invalid_nickname");
+                } else if (!NicknameValidator.isNotUsed(nickname)) {
                     langManager.sendMessage(player, "error.invalid_nickname");
                 } else {
                     this.plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
