@@ -1,21 +1,19 @@
 error:
   console: "&cThis command can't be used from the console!"
   permission: "&cInsufficent permissions!"
-  invalid_nickname: "&c%nickname% is an invalid nickname!"
 
 nickname:
   changed: "&aChanged nickname from &b%old_nickname%&a to &b%new_nickname%&a!"
-  changed_other: "&aChanged &b%player%&a nickname to &b%new_nickname%&a!"
   error:
     usage: "&c/nick <nick>"
-    characters: "&b%nickname%&c contains invalid characters!"
-    already_used: "&b%nickname%&c is already in use by another player!"
-    length: "&b%nickname%&c length has to be between 3 and 16 letters!"
+    characters: "&b%nickname%&c contiene caracteres invalidos!"
+    already_used: "&b%nickname%&c ya esta en uso!"
+    length: "&b%nickname%&c tiene que medir entre 3 y 16 letras!"
 
 clearnick:
-  cleared: "&aSuccesfully removed your nickname &b%nickname%&a!"
+  cleared: "&aEliminaste tu nickname &b%nickname%&a!"
 
 help: |-
-  &aNicknames &b%version%&a by &bLinsaFTW
-  &e /nick <nick>&7 - &bChange your nickname!
-  &e /clearnick&7 - &bClear your nickname!
+  &aNicknames &b%version%&a por &bLinsaFTW
+  &e /nick <nick>&7 - &bCambia tu nickname!
+  &e /clearnick&7 - &bLimpia tu nickname!
