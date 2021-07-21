@@ -4,10 +4,13 @@ error:
 
 nickname:
   changed: "&aChanged nickname from &b%old_nickname%&a to &b%new_nickname%&a!"
+  changed_other: "&aChanged nickname of &b%target%&a from &b%old_nickname%&a to &b%new_nickname%&a!"
   error:
-    usage: "&c/nick <nick>"
+    offline: "&cTarget player is not online!"
+    usage: "&c/nick <nick> [player]"
     characters: "&b%nickname%&c contains invalid characters!"
     already_used: "&b%nickname%&c is already in use by another player!"
+    already_set: "&b%nickname%&c is already set for &b%target%&c!"
     length: "&b%nickname%&c length has to be between 3 and 16 letters!"
 
 clearnick:

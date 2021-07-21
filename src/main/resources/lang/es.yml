@@ -4,10 +4,13 @@ error:
 
 nickname:
   changed: "&aCambiaste tu nickname de &b%old_nickname%&a a &b%new_nickname%&a!"
+  changed_other: "&aCambiaste el nickname de &b%target%&a de &b%old_nickname%&a a &b%new_nickname%&a!"
   error:
-    usage: "&c/nick <nick>"
+    offline: "&cEl jugador no esta en linea!"
+    usage: "&c/nick <nick> [jugador]"
     characters: "&b%nickname%&c contiene caracteres invalidos!"
     already_used: "&b%nickname%&c ya esta en uso!"
+    already_set: "&b%nickname%&c ya esta establecido para &b%target%&c!"
     length: "&b%nickname%&c tiene que medir entre 3 y 16 letras!"
 
 clearnick:
@@ -16,5 +19,5 @@ clearnick:
 
 help: |-
   &aNicknames &b%version%&a por &bLinsaFTW
-  &e /nick <nick>&7 - &bCambia tu nickname!
+  &e /nick <nick> [jugador]&7 - &bCambia tu nickname!
   &e /clearnick&7 - &bLimpia tu nickname!

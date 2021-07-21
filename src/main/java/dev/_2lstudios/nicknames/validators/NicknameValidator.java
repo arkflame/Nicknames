@@ -45,4 +45,10 @@ public class NicknameValidator {
 
         return true;
     }
+
+    public static boolean isEqual(final String nickname, final String nickname1) {
+        final String translatedNickname = ChatColor.translateAlternateColorCodes('&', nickname);
+
+        return translatedNickname.equals(nickname1);
+    }
 }
