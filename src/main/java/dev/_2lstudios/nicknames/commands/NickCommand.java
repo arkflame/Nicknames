@@ -34,7 +34,7 @@ public class NickCommand implements CommandExecutor {
             } else if (!NicknameValidator.isNotUsed(nickname, target.getName())) {
                 langManager.sendMessage(sender, "nickname.error.already_used", new Placeholder("%nickname%", nickname));
             } else if (NicknameValidator.isEqual(nickname, target.getDisplayName())) {
-                langManager.sendMessage(sender, "nickname.error.already_set", new Placeholder("%nickname%", nickname));
+                langManager.sendMessage(sender, "nickname.error.already_set", new Placeholder("%nickname%", nickname), new Placeholder("%target%", target.getName()));
             } else {
                 final String oldName = target.getDisplayName();
                 final NicknamePlayer targetNicknamePlayer = new NicknamePlayer(nicknameProvider, target.getUniqueId());
