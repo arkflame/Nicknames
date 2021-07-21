@@ -15,9 +15,12 @@ nickname:
 
 clearnick:
   cleared: "&aSuccesfully removed your nickname &b%nickname%&a!"
-  no_nickname: "&cYou don't have any nicknames!"
+  cleared_other: "&aSuccessfully removed &b%target%&a nickname &b%nickname%&a!"
+  no_nickname: "&cThere is no nickname established!"
+  error:
+    offline: "&cTarget player is not online!"
 
 help: |-
   &aNicknames &b%version%&a by &bLinsaFTW
   &e /nick <nick>&7 - &bChange your nickname!
-  &e /clearnick&7 - &bClear your nickname!
+  &e /clearnick [player]&7 - &bClear your nickname!

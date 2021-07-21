@@ -25,6 +25,38 @@ public class ClearNickCommand implements CommandExecutor {
         this.langManager = langManager;
     }
 
+    private void clear(final Player sender, final Player target) {
+        this.plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
+            final String displayName = target.getDisplayName();
+
+            if (displayName == null || displayName.equals(target.getName())) {
+                langManager.sendMessage(sender, "clearnick.no_nickname");
+            } else {
+                final NicknamePlayer targetNicknamePlayer = new NicknamePlayer(nicknameProvider, target.getUniqueId());
+
+                targetNicknamePlayer.setNickname(null);
+                target.setDisplayName(null);
+
+                if (sender != target) {
+                    langManager.sendMessage(sender, "clearnick.cleared_other", new Placeholder("%nickname%", displayName),
+                            new Placeholder("%target%", target.getName()));
+                }
+
+                langManager.sendMessage(target, "clearnick.cleared", new Placeholder("%nickname%", displayName));
+            }
+        });
+    }
+
+    private Player getPlayer(final String name) {
+        for (final Player player : plugin.getServer().getOnlinePlayers()) {
+            if (name.equalsIgnoreCase(player.getName())) {
+                return player;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -35,20 +67,20 @@ public class ClearNickCommand implements CommandExecutor {
             if (!player.hasPermission("nicknames.usage")) {
                 langManager.sendMessage(player, "error.permission");
             } else {
-                final String displayName = player.getDisplayName();
-                
-                if (displayName == null || displayName.equals(player.getName())) {
-                    langManager.sendMessage(player, "clearnick.no_nickname");
-                } else {
-                    this.plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-                        final NicknamePlayer nicknamePlayer = new NicknamePlayer(nicknameProvider,
-                                player.getUniqueId());
-                        final String nickname = player.getDisplayName();
+                if (args.length > 0) {
+                    if (player.hasPermission("nicknames.admin")) {
+                        final Player target = getPlayer(args[0]);
 
-                        nicknamePlayer.setNickname(null);
-                        player.setDisplayName(null);
-                        langManager.sendMessage(player, "clearnick.cleared", new Placeholder("%nickname%", nickname));
-                    });
+                        if (target != null) {
+                            clear(player, target);
+                        } else {
+                            langManager.sendMessage(player, "clearnick.error.offline");
+                        }
+                    } else {
+                        langManager.sendMessage(player, "error.permission");
+                    }
+                } else {
+                    clear(player, player);
                 }
             }
         }
