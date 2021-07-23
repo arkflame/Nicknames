@@ -1,1 +1,1 @@
-# Bukkit Boilerplate
+# Nicknames
