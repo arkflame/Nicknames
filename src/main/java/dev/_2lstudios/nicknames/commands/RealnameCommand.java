@@ -41,10 +41,12 @@ public class RealnameCommand implements CommandExecutor {
                     }
                 }
 
-                if (stringBuilder.isEmpty()) {
+                final String stringBuilderString = stringBuilder.toString();
+
+                if (stringBuilderString.isEmpty()) {
                     langManager.sendMessage(sender, "realname.error.no_players");
                 } else {
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', stringBuilder.toString()));
+                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', stringBuilderString));
                 }
             });
         }
