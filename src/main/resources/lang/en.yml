@@ -20,6 +20,12 @@ clearnick:
   error:
     offline: "&cTarget player is not online!"
 
+realname:
+  show: "&aThe real name of &b%nickname%&a is &b%player%&a!"
+  error:
+    usage: "&c/realname <nick>"
+    no_players: "&cThere are no players with that nickname!"
+
 help: |-
   &aNicknames &b%version%&a by &bLinsaFTW
   &e /nick <nick>&7 - &bChange your nickname!

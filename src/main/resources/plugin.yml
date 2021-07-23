@@ -6,8 +6,8 @@ version: ${version}
 url: ${url}
 commands:
   nick:
-    description: "Change your nickname with this command."
-  nicknames:
-    description: "Base command of the Nicknames plugin"
+    description: "Change your nickname with this command"
   clearnick:
     description: "Clears your current nickname"
+  realname:
+    description: "See the realname of a player"

@@ -1,6 +1,5 @@
 package dev._2lstudios.nicknames.commands;
 
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -11,7 +10,6 @@ import dev._2lstudios.nicknames.lang.LangManager;
 import dev._2lstudios.nicknames.nickname.NicknamePlayer;
 import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
 import dev._2lstudios.nicknames.placeholders.Placeholder;
-import dev._2lstudios.nicknames.validators.NicknameValidator;
 
 public class ClearNickCommand implements CommandExecutor {
     private final Plugin plugin;
