@@ -31,7 +31,7 @@ public class LangManager {
         this.defaultLocale = defaultLocale;
     }
 
-    public void sendMessage(CommandSender sender, String key, final Placeholder... placeholders) {
+    public String getMessage(CommandSender sender, String key, final Placeholder... placeholders) {
         final String rawLocale;
 
         if (sender instanceof Player) {
@@ -61,9 +61,13 @@ public class LangManager {
         if (lang != null) {
             final String message = lang.getMessage(key, placeholders);
 
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
+            return ChatColor.translateAlternateColorCodes('&', message);
         } else {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNo lang files had been found!"));
+            return ChatColor.translateAlternateColorCodes('&', "&cNo lang files had been found!");
         }
+    }
+
+    public void sendMessage(CommandSender sender, String key, final Placeholder... placeholders) {
+        sender.sendMessage(getMessage(sender, key, placeholders));
     }
 }
