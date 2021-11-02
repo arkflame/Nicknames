@@ -21,6 +21,10 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+        <repository>
+            <id>2lstudios-repo</id>
+            <url>https://ci.2lstudios.dev/plugin/repository/everything/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -31,9 +35,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver-sync</artifactId>
-            <version>4.2.3</version>
+            <groupId>com.dotphin</groupId>
+            <artifactId>milkshake-orm</artifactId>
+            <version>0.1-BETA</version>
         </dependency>
     </dependencies>
     <build>
