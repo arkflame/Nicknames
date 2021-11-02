@@ -7,15 +7,15 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.Plugin;
 
 import dev._2lstudios.nicknames.nickname.NicknamePlayer;
-import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
+import dev._2lstudios.nicknames.nickname.NicknamePlayerService;
 
 public class PlayerJoinListener implements Listener {
     private final Plugin plugin;
-    private final NicknameProvider nicknameProvider;
+    private final NicknamePlayerService nicknamePlayerService;
 
-    public PlayerJoinListener(final Plugin plugin, final NicknameProvider nicknameProvider) {
+    public PlayerJoinListener(final Plugin plugin, final NicknamePlayerService nicknamePlayerService) {
         this.plugin = plugin;
-        this.nicknameProvider = nicknameProvider;
+        this.nicknamePlayerService = nicknamePlayerService;
     }
 
     @EventHandler(ignoreCancelled = true)
@@ -27,7 +27,7 @@ public class PlayerJoinListener implements Listener {
         }
 
         plugin.getServer().getScheduler().runTaskAsynchronously(plugin, () -> {
-            final NicknamePlayer nicknamePlayer = new NicknamePlayer(nicknameProvider, event.getPlayer().getUniqueId());
+            final NicknamePlayer nicknamePlayer = nicknamePlayerService.getOrCreate(player.getName(), player.getUniqueId());
             final String nickname = nicknamePlayer.getNickname();
 
             if (nickname != null) {

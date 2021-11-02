@@ -1,23 +1,51 @@
 package dev._2lstudios.nicknames.nickname;
 
-import java.util.UUID;
+import com.dotphin.milkshakeorm.entity.Entity;
+import com.dotphin.milkshakeorm.entity.ID;
+import com.dotphin.milkshakeorm.entity.Prop;
 
-import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
+public class NicknamePlayer extends Entity {
+    @ID
+    public String id;
 
-public class NicknamePlayer {
-    private final NicknameProvider nicknameProvider;
-    private final UUID uuid;
+    @Prop
+    public String uuid;
 
-    public NicknamePlayer(final NicknameProvider nicknameProvider, final UUID uuid) {
-        this.nicknameProvider = nicknameProvider;
+    @Prop
+    public String name;
+
+    @Prop
+    public String nickname;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(final String uuid) {
         this.uuid = uuid;
     }
 
-    public String getNickname() {
-        return nicknameProvider.getNickname(uuid);
+    public String getName() {
+        return name;
     }
 
-    public String setNickname(final String nickname) {
-        return nicknameProvider.setNickname(uuid, nickname);
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(final String nickname) {
+        this.nickname = nickname;
     }
 }

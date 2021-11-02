@@ -16,8 +16,7 @@ import dev._2lstudios.nicknames.commands.NickCommand;
 import dev._2lstudios.nicknames.commands.RealnameCommand;
 import dev._2lstudios.nicknames.lang.LangManager;
 import dev._2lstudios.nicknames.listeners.PlayerJoinListener;
-import dev._2lstudios.nicknames.nickname.providers.MongoDBNicknameProvider;
-import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
+import dev._2lstudios.nicknames.nickname.NicknamePlayerService;
 import dev._2lstudios.nicknames.utils.ConfigUtil;
 
 public class Nicknames extends JavaPlugin {
@@ -59,13 +58,13 @@ public class Nicknames extends JavaPlugin {
         createLangs(configUtil);
 
         final Configuration config = configUtil.get("%datafolder%/config.yml");
-        final NicknameProvider nicknameProvider = new MongoDBNicknameProvider(config);
+        final NicknamePlayerService nicknamePlayerService = new NicknamePlayerService(config);
         final LangManager langManager = new LangManager(configUtil, config.getString("lang", "en"));
 
-        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, nicknameProvider), this);
+        this.getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, nicknamePlayerService), this);
 
-        this.getCommand("nick").setExecutor(new NickCommand(this, nicknameProvider, langManager));
-        this.getCommand("clearnick").setExecutor(new ClearNickCommand(this, nicknameProvider, langManager));
-        this.getCommand("realname").setExecutor(new RealnameCommand(this, nicknameProvider, langManager));
+        this.getCommand("nick").setExecutor(new NickCommand(this, nicknamePlayerService, langManager));
+        this.getCommand("clearnick").setExecutor(new ClearNickCommand(this, nicknamePlayerService, langManager));
+        this.getCommand("realname").setExecutor(new RealnameCommand(this, nicknamePlayerService, langManager));
     }
 }

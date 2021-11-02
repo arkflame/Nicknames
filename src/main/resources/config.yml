@@ -1,16 +1,10 @@
 lang: "en"
 
-provider:
+database:
   driver: "mongodb"
+  user: ""
+  pass: ""
   host: "localhost"
   port: 27017
   database: "minecraft"
-  user: ""
-  pass: ""
-
-  # For SQL Databases
-  prefix: "nickname_"
   table: "users"
-
-  # For NoSQL Databases
-  collection: "users"

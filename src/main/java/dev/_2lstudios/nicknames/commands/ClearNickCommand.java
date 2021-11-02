@@ -8,18 +8,18 @@ import org.bukkit.plugin.Plugin;
 
 import dev._2lstudios.nicknames.lang.LangManager;
 import dev._2lstudios.nicknames.nickname.NicknamePlayer;
-import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
+import dev._2lstudios.nicknames.nickname.NicknamePlayerService;
 import dev._2lstudios.nicknames.placeholders.Placeholder;
 
 public class ClearNickCommand implements CommandExecutor {
     private final Plugin plugin;
-    private final NicknameProvider nicknameProvider;
+    private final NicknamePlayerService nicknamePlayerService;
     private final LangManager langManager;
 
-    public ClearNickCommand(final Plugin plugin, final NicknameProvider nicknameProvider,
+    public ClearNickCommand(final Plugin plugin, final NicknamePlayerService nicknamePlayerService,
             final LangManager langManager) {
         this.plugin = plugin;
-        this.nicknameProvider = nicknameProvider;
+        this.nicknamePlayerService = nicknamePlayerService;
         this.langManager = langManager;
     }
 
@@ -30,7 +30,7 @@ public class ClearNickCommand implements CommandExecutor {
             if (displayName == null || displayName.equals(target.getName())) {
                 langManager.sendMessage(sender, "clearnick.no_nickname");
             } else {
-                final NicknamePlayer targetNicknamePlayer = new NicknamePlayer(nicknameProvider, target.getUniqueId());
+                final NicknamePlayer targetNicknamePlayer = nicknamePlayerService.getOrCreate(target.getName(), target.getUniqueId());
 
                 targetNicknamePlayer.setNickname(null);
                 target.setDisplayName(null);

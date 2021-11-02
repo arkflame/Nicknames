@@ -9,18 +9,18 @@ import org.bukkit.plugin.Plugin;
 
 import dev._2lstudios.nicknames.lang.LangManager;
 import dev._2lstudios.nicknames.nickname.NicknamePlayer;
-import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
+import dev._2lstudios.nicknames.nickname.NicknamePlayerService;
 import dev._2lstudios.nicknames.placeholders.Placeholder;
 import dev._2lstudios.nicknames.validators.NicknameValidator;
 
 public class NickCommand implements CommandExecutor {
     private final Plugin plugin;
-    private final NicknameProvider nicknameProvider;
+    private final NicknamePlayerService nicknamePlayerService;
     private final LangManager langManager;
 
-    public NickCommand(final Plugin plugin, final NicknameProvider nicknameProvider, final LangManager langManager) {
+    public NickCommand(final Plugin plugin, final NicknamePlayerService nicknamePlayerService, final LangManager langManager) {
         this.plugin = plugin;
-        this.nicknameProvider = nicknameProvider;
+        this.nicknamePlayerService = nicknamePlayerService;
         this.langManager = langManager;
     }
 
@@ -36,7 +36,7 @@ public class NickCommand implements CommandExecutor {
                 langManager.sendMessage(sender, "nickname.error.already_set", new Placeholder("%nickname%", nickname), new Placeholder("%target%", target.getName()));
             } else {
                 final String oldName = target.getDisplayName();
-                final NicknamePlayer targetNicknamePlayer = new NicknamePlayer(nicknameProvider, target.getUniqueId());
+                final NicknamePlayer targetNicknamePlayer = nicknamePlayerService.getOrCreate(target.getName(), target.getUniqueId());
 
                 targetNicknamePlayer.setNickname(nickname);
                 target.setDisplayName(nickname);

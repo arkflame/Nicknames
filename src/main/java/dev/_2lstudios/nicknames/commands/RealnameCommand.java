@@ -9,14 +9,14 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import dev._2lstudios.nicknames.lang.LangManager;
-import dev._2lstudios.nicknames.nickname.providers.NicknameProvider;
+import dev._2lstudios.nicknames.nickname.NicknamePlayerService;
 import dev._2lstudios.nicknames.placeholders.Placeholder;
 
 public class RealnameCommand implements CommandExecutor {
     private final Plugin plugin;
     private final LangManager langManager;
 
-    public RealnameCommand(final Plugin plugin, final NicknameProvider nicknameProvider,
+    public RealnameCommand(final Plugin plugin, final NicknamePlayerService nicknamePlayerService,
             final LangManager langManager) {
         this.plugin = plugin;
         this.langManager = langManager;
