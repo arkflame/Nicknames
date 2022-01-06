@@ -6,7 +6,6 @@ import com.dotphin.milkshakeorm.MilkshakeORM;
 import com.dotphin.milkshakeorm.providers.Provider;
 import com.dotphin.milkshakeorm.repository.Repository;
 import com.dotphin.milkshakeorm.utils.MapFactory;
-import com.dotphin.milkshakeorm.utils.URI;
 
 import org.bukkit.configuration.Configuration;
 
@@ -14,16 +13,10 @@ public class NicknamePlayerService {
 
     private final Repository<NicknamePlayer> repository;
 
-    public NicknamePlayerService(final String uri) {
-        final Provider provider = MilkshakeORM.connect(uri);
-
-        this.repository = MilkshakeORM.addRepository(NicknamePlayer.class, provider);
-    }
-
     public NicknamePlayerService(final Configuration config) {
-        this(new URI(config.getString("database.driver")).setUsername(config.getString("database.user"))
-                .setPassword(config.getString("database.pass")).setHost(config.getString("database.host"))
-                .setPort(config.getInt("database.port")).setPath(config.getString("database.database")).toString());
+        final Provider provider = MilkshakeORM.connect(config.getString("database.uri"));
+        this.repository = MilkshakeORM.addRepository(NicknamePlayer.class, provider,
+                config.getString("database.collection"));
     }
 
     public NicknamePlayer getByName(final String name) {

@@ -1,10 +1,5 @@
 lang: "en"
 
 database:
-  driver: "mongodb"
-  user: ""
-  pass: ""
-  host: "localhost"
-  port: 27017
-  database: "minecraft"
-  table: "users"
+  uri: "mongodb://localhost/minecraft"
+  collection: "PlayerNickname"

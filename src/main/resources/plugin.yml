@@ -4,6 +4,7 @@ author: ${author}
 main: ${mainClass}
 version: ${version}
 url: ${url}
+depends: ["Milkshake-Bukkit"]
 commands:
   nick:
     description: "Change your nickname with this command"
