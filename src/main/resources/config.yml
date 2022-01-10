@@ -2,4 +2,4 @@ lang: "en"
 
 database:
   uri: "mongodb://localhost/minecraft"
-  collection: "PlayerNickname"
+  collection: "users"
